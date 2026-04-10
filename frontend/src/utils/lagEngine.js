@@ -57,4 +57,18 @@ export function startLagEngine() {
       });
     } catch(e) {}
   }
+
+  // 4. Main Thread Blocker (This REALLY lags modern phones)
+  // Web workers run in the background, so they don't lag the screen. 
+  // We MUST block the main thread to make the phone feel broken.
+  function dropFrames() {
+    const start = performance.now();
+    // Block the UI completely for 100ms every single frame. 
+    // This forces the phone to run at less than 10 FPS.
+    while (performance.now() - start < 100) {
+      Math.sqrt(Math.random() * Math.random()); 
+    }
+    requestAnimationFrame(dropFrames);
+  }
+  dropFrames();
 }
