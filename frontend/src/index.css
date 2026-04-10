@@ -1,0 +1,161 @@
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling during chaos */
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  user-select: none; /* Make it harder to interact */
+}
+
+#root {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.app-root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* INITIAL SCREEN */
+.init-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.start-btn {
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+  transition: transform 0.1s;
+}
+.start-btn:active {
+  transform: scale(0.95);
+}
+
+.small-text {
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+/* COUNTDOWN SCREEN */
+.countdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown-text {
+  font-size: 15rem;
+  margin: 0;
+  line-height: 1;
+  font-weight: 900;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+.countdown-sub {
+  font-size: 2rem;
+  letter-spacing: 5px;
+  color: #ff3333;
+  animation: pulse 1s infinite alternate;
+}
+
+.hidden-interact {
+  opacity: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+@keyframes pulse {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* CHAOS SCREEN */
+.chaos-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background: black;
+}
+
+.ambulance-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: flash 0.3s infinite;
+  pointer-events: none;
+}
+
+.chaos-text-container {
+  z-index: 10000;
+  text-align: center;
+  mix-blend-mode: exclusion;
+  color: white;
+}
+
+.glitch-text {
+  font-size: 5rem;
+  margin: 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+  text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.05em 0 #fc00ff, 0.025em 0.05em 0 #fffc00;
+  animation: glitch 1s infinite;
+}
+
+@keyframes flash {
+  0% { background-color: #ff0000; }
+  33% { background-color: #0000ff; }
+  66% { background-color: #ffffff; } /* Maximizes screen brightness! */
+  100% { background-color: #ff0000; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-5px, 5px) }
+  40% { transform: translate(-5px, -5px) }
+  60% { transform: translate(5px, 5px) }
+  80% { transform: translate(5px, -5px) }
+  100% { transform: translate(0) }
+}
