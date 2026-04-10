@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 
 // Serve the static files from the built React app
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // The joke endpoint
 app.get('/brew', (req, res) => {
@@ -25,7 +25,7 @@ app.get('/api/status', (req, res) => {
 
 // Any unmatched routes should fall back to the React app so React Router works
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
