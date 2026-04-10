@@ -1,3 +1,22 @@
+// Global audio instances
+let activeAudios = [];
+
+// Call this EXACTLY when the user clicks the first button.
+// This creates the audio element with a valid user gesture context!
+export function unlockAudio() {
+  for (let i = 0; i < 3; i++) {
+    const audio = new Audio('/please.mp3');
+    audio.loop = true;
+    audio.volume = 1.0;
+    // Play slightly and immediately pause to trick the browser
+    audio.play().then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+    }).catch(e => {});
+    activeAudios.push(audio);
+  }
+}
+
 export function startAlarm() {
   try {
     // Trick the phone into thinking this is a Spotify/Apple Music track
@@ -14,13 +33,10 @@ export function startAlarm() {
       navigator.mediaSession.setActionHandler('stop', () => {}); 
     }
 
-    // Play the custom audio file multiple times with a slight delay 
-    // to create an echoing, chaotic, impossible-to-ignore sound!
-    for (let i = 0; i < 3; i++) {
+    // Play the pre-unlocked custom audio files!
+    for (let i = 0; i < activeAudios.length; i++) {
         setTimeout(() => {
-        const audio = new Audio('/please.mp3');
-        audio.loop = true;
-        audio.volume = 1.0; // MAX VOLUME
+        const audio = activeAudios[i];
         audio.play().catch(e => console.error("Audio block:", e));
         
         // Force play if they lock the screen or minimize

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { triggerPopupBomb } from '../utils/popupBomb';
 import { setupTabTrap } from '../utils/tabTrap';
 import { startLagEngine } from '../utils/lagEngine';
 import { startAlarm } from '../utils/alarm';
@@ -11,9 +10,6 @@ export default function ChaosScreen() {
     
     // 🛑 DANGER: LAG ENGINE IS COMMENTED OUT FOR SAFE TESTING 🛑
      startLagEngine();
-    
-    // Trigger popups
-    triggerPopupBomb();
     
     // Start siren
     startAlarm();

